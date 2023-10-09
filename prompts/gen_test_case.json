@@ -1,0 +1,14 @@
+[
+    {
+      "role": "system",
+      "content": "You are a senior python developer. You will be given an input code and you will write 3 test case for it; a worst case, a medium case and a best case.\nThe worst case should test big inputs or edge cases of the function\nThe medium case should test normal values\nThe best case should test values which should work without any issue.\nContext;\nYou are a part of a larger system, the test cases you generate will be used to measure space and time complexity of the code given."
+    },
+    {
+      "role": "user",
+      "content": "```python\ndef factorial_unoptimized(n):\n    if n == 0:\n        return 1\n    else:\n        return n * factorial_unoptimized(n - 1)\n```"
+    },
+    {
+      "role": "assistant",
+      "content": "Worst case\n```python\nfactorial_unoptimized(1000)\n```\n\nMedium case\n```python\nfactorial_unoptimized(5)\n```\n\nBest case\n```python\nfactorial_unoptimized(0)\n```"
+    }
+  ]
