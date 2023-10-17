@@ -1,5 +1,6 @@
 import os
 import openai
+import re
 
 
 class optimization_suggestor_agent:
@@ -82,4 +83,22 @@ class optimization_suggestor_agent:
         presence_penalty=0
         )
 
+        self.intermediate_optimization = response.choices[0].message.content
         return response.choices[0].message.content
+    
+    def extract_code(self) -> list[str]:
+        pattern = r"```python(.*?)```"
+        extracted_code_blocks = re.findall(pattern, self.intermediate_optimization, re.DOTALL)
+
+        extracted_code_blocks = [string.strip() for string in extracted_code_blocks]
+        for i in extracted_code_blocks:
+            print(i)
+            print("--------")
+
+        self.extracted_code_blocks = extracted_code_blocks
+        return extracted_code_blocks[0]
+
+
+
+        
+

@@ -14,8 +14,7 @@ def test_case():
     start_memory = memory_usage_psutil()
 
     # Call the function here
-    documents = ["This is a short document."]
-unoptimized_word_count(documents)
+    calculate_factorials_up_to_number(0)
     
     end_time = time.time()
     end_memory = memory_usage_psutil()
@@ -23,23 +22,21 @@ unoptimized_word_count(documents)
     print(f"Time taken: {end_time - start_time} seconds")
     print(f"Memory used: {end_memory - start_memory} B")
 
+def calculate_factorials_up_to_number(n):
+    if not isinstance(n, int) or n < 0:
+        raise ValueError("Input must be a non-negative integer.")
 
-def unoptimized_word_count(documents):
-    word_count = {}
-    
-    for doc in documents:
-        words = doc.split()
-        for word in words:
-            # Remove punctuation and convert to lowercase
-            word = word.strip('.,!?()[]{}"'').lower()
-            if word:
-                if word in word_count:
-                    word_count[word] += 1
-                else:
-                    word_count[word] = 1
-    
-    return word_count
+    factorials = {}
 
+    def factorial(k):
+        if k in factorials:
+            return factorials[k]
+        elif k == 0:
+            return 1
+        else:
+            result = k * factorial(k - 1)
+            factorials[k] = result
+            return result
 
-
+    return [factorial(i) for i in range(n + 1)]
 test_case()

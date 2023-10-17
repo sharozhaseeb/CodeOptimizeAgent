@@ -2,8 +2,10 @@ import os
 import json
 import openai
 import re
+from dotenv import load_dotenv
 
-openai.api_key = "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"
+load_dotenv()
+openai.api_key = os.environ.get('API-KEY')
 
 
 
@@ -11,10 +13,12 @@ class testcase_agent:
     def __init__(
                     self,
                     code,
-                    interim_path = "interim_files"
+                    interim_path = "interim_files",
+                    test_case_list = []
                 ):
         self.code = code
         self.interim_path = interim_path
+        self.extracted_code_blocks = test_case_list
 
 
 
