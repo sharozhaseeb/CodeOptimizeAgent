@@ -1,1 +1,1 @@
-{"s = sum(numbers)": {"hits": "56", "percent_time": "28.5"}, "prod = 1": {"hits": "57", "percent_time": "5.9"}, "for n in numbers:": {"hits": "58", "percent_time": "31.3"}, "prod *= n": {"hits": "59", "percent_time": "28.1"}, "return s, prod": {"hits": "60", "percent_time": "6.1"}}
+{"s = sum(numbers)": {"hits": "56", "percent_time": "76.6"}, "prod = 1": {"hits": "57", "percent_time": "1.7"}, "for n in numbers:": {"hits": "58", "percent_time": "9.9"}, "prod *= n": {"hits": "59", "percent_time": "9.8"}, "return s, prod": {"hits": "60", "percent_time": "2.1"}}

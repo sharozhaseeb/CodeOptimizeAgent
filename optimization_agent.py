@@ -97,6 +97,21 @@ class optimization_suggestor_agent:
 
         self.extracted_code_blocks = extracted_code_blocks
         return extracted_code_blocks[0]
+    
+    def run_flow(self) -> str:
+
+        print("----raw optimizations----")
+        resp = self.raw_optimizations()
+        print(resp)
+        print("\n")
+        print("------Optimizer----------")
+        resp = self.optimizer()
+        print(resp)
+        print("\n")
+        print("------Code Extraction-----")
+        resp = self.extract_code()
+        print(resp)
+        return resp
 
 
 

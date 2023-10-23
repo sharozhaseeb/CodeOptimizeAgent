@@ -139,7 +139,29 @@ class testcase_agent:
                 }
 
             ]
-            
+    
+    def run_flow(self) -> str:
+
+
+        print("-----test case generation---")
+        resp = self.gen_test_case()
+        print(resp)
+        print("\n")
+        print("-----test case extraction---")
+        resp = self.extract_test_cases()
+        print(resp)
+        print("\n")
+        print("-----test case merger---")
+        resp = self.join_test_case()
+        print(*resp, sep= "\n")
+        print("\n")
+        print("-----test case execution---")
+        resp = self.run_test_case()
+        print(resp)
+        print("\n")
+        print("-----test case response extraction---")
+        response = self.extract_info_tg()
+        print(*response, sep = "\n")
 
 
 
