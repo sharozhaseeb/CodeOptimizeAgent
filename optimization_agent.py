@@ -61,7 +61,7 @@ class optimization_suggestor_agent:
         messages=[
             {
             "role": "system",
-            "content": "You are a senior python developer. You will be given an input code with possible optimization that should be introduced into the code. \nYou will be returning an optimized version of the code.\n\nContext;\nYou are a part of a larger system, the optimizations you offer will help make the code more efficient in terms of time and memory."
+            "content": "You are a senior python developer. You will be given an input code with possible optimization that should be introduced into the code. \nYou will be returning an optimized version of the code. Recursion is frowned upon\n\nContext;\nYou are a part of a larger system, the optimizations you offer will help make the code more efficient in terms of time and memory."
             },
             {
             "role": "user",

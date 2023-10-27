@@ -79,7 +79,6 @@ class testcase_agent:
             tcb_1 = tcb_1 + "\ntest_case()"
             _.append(tcb_1)
         self.test_case_list = _
-
         return self.test_case_list
 
 
@@ -162,6 +161,11 @@ class testcase_agent:
         print("-----test case response extraction---")
         response = self.extract_info_tg()
         print(*response, sep = "\n")
+
+        return {
+            'response':response,
+            'testcase':self.extracted_code_blocks
+        }
 
 
 

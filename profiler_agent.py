@@ -51,4 +51,10 @@ class profiler:
 
         self.code_mutated = "\n".join(__code)
         return self.code_mutated
+    
+    def run_flow(self) -> str:
+        self.initialize_profiler()
+        self.mutate_code()
+
+        return self.code_mutated
         

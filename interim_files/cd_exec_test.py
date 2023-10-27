@@ -14,7 +14,7 @@ def test_case():
     start_memory = memory_usage_psutil()
 
     # Call the function here
-    calculate_factorials_up_to_number(10)
+    calculate_factorials_up_to_number(1000)
     
     end_time = time.time()
     end_memory = memory_usage_psutil()
@@ -22,16 +22,12 @@ def test_case():
     print(f"Time taken: {end_time - start_time} seconds")
     print(f"Memory used: {end_memory - start_memory} B")
 
+import math
+
 def calculate_factorials_up_to_number(n):
-    if not isinstance(n, int) or n < 0:
-        return []
+    assert n >= 0, "Input must be a non-negative integer."
 
-    factorials = [1]
-
-    factorial = 1
-    for i in range(1, n + 1):
-        factorial *= i
-        factorials.append(factorial)
+    factorials = [math.factorial(i) for i in range(n + 1)]
 
     return factorials
 test_case()

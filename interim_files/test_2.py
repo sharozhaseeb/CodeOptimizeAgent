@@ -23,10 +23,10 @@ def test_case():
     print(f"Memory used: {end_memory - start_memory} B")
 
 def calculate_factorials_up_to_number(n):
-    if n < 0:
-        raise ValueError("Input must be a non-negative integer.")
+    if not isinstance(n, int) or n < 0:
+        return []
 
-    factorials = [1]  # Initialize with the factorial of 0
+    factorials = [1]
 
     factorial = 1
     for i in range(1, n + 1):

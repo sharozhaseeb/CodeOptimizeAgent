@@ -52,11 +52,17 @@ def save_dict_as_json(data, output_path):
     except IOError as e:
         print(f"An error occurred while saving the JSON data: {e}")
 
-def do_stuff(numbers):
-    s = sum(numbers)
-    prod = 1
-    for n in numbers:
-        prod *= n
-    return s, prod
-result_dict = profile_print(do_stuff, [1, 2, 3, 4, 50000000000000000000000])
+def calculate_factorials_up_to_number(n):
+    if n < 0:
+        raise ValueError("Input must be a non-negative integer.")
+
+    factorials = [1]  # Initialize with the factorial of 0
+
+    factorial = 1
+    for i in range(1, n + 1):
+        factorial *= i
+        factorials.append(factorial)
+
+    return factorials
+result_dict = profile_print(calculate_factorials_up_to_number, 0)
 save_dict_as_json(result_dict, 'interim_files/profiler_obj.json')
