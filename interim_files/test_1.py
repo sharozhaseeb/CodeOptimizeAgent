@@ -22,16 +22,12 @@ def test_case():
     print(f"Time taken: {end_time - start_time} seconds")
     print(f"Memory used: {end_memory - start_memory} B")
 
+
 def calculate_factorials_up_to_number(n):
-    if not isinstance(n, int) or n < 0:
-        return []
-
-    factorials = [1]
-
     factorial = 1
+    yield factorial  # The factorial of 0 is 1
     for i in range(1, n + 1):
         factorial *= i
-        factorials.append(factorial)
+        yield factorial
 
-    return factorials
 test_case()

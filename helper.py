@@ -48,3 +48,15 @@ def extract_string_between_parentheses(input_str):
     else:
         raise ValueError("Input does not contain a valid pair of parentheses.")
 
+def extract_code(text:str) -> str:
+    if '```python' not in text:
+        raise ValueError('no code found')
+    else:
+        pattern = r'```python(.*?)```'
+
+        match = re.search(pattern, text, re.DOTALL)
+
+        if match:
+            extracted_text = match.group(1)
+            # print(extracted_text)
+        return extracted_text

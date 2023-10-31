@@ -37,7 +37,7 @@ class flow_master:
         print("------------------------------------------")
 
         op_agent = optimization_suggestor_agent(code= self.initial_profiled_code,
-                                        execution_obj= self.initial_testcase_info['response'])
+                                        execution_obj= self.initial_testcase_info)
         self.optimization_suggestion = op_agent.run_flow()
 
         print("------------------------------------------")
@@ -46,12 +46,13 @@ class flow_master:
         print("\n")
         print("------------------------------------------")
 
-        cd_exec = code_executor(
-            code = self.optimization_suggestion,
-            testcase = self.initial_testcase_info['testcase'] 
-        )
-        print(self.initial_testcase_info['testcase'] )
-        self.optimized_code_testcase_response = cd_exec.run()
+        # cd_exec = code_executor(
+        #     code = self.optimization_suggestion,
+        #     testcase = self.initial_testcase_info['testcase'] 
+        # )
+
+        # print(self.initial_testcase_info['testcase'] )
+        # self.optimized_code_testcase_response = cd_exec.run()
 
         print("------------------------------------------")
         print("this is the optimized codes testcase response\n")
@@ -59,4 +60,3 @@ class flow_master:
         pprint(self.initial_testcase_info['response'])
         print("\n")
         print("------------------------------------------")
-
