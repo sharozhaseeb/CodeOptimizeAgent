@@ -15,14 +15,16 @@ def extract_function_name_from_string(func_str):
     # Parse the function definition using AST
     try:
         parsed_ast = ast.parse(func_str)
+        print(parsed_ast.body)
     except SyntaxError as e:
         raise ValueError(f"Unable to parse the provided function string: {str(e)}")
 
     # Extract the function name
-    if isinstance(parsed_ast.body[0], ast.FunctionDef):
-        return parsed_ast.body[0].name
-    else:
-        raise ValueError("Input is not a valid function definition.")
+    for instance in parsed_ast.body:
+        if isinstance(instance, ast.FunctionDef):
+            return instance.name
+    
+    raise ValueError("Input is not a valid function definition.")
     
 
 

@@ -53,12 +53,12 @@ def save_dict_as_json(data, output_path):
         print(f"An error occurred while saving the JSON data: {e}")
 
 
-def calculate_factorials_up_to_number(n):
-    factorial = 1
-    yield factorial  # The factorial of 0 is 1
-    for i in range(1, n + 1):
-        factorial *= i
-        yield factorial
+import numpy as np
 
-result_dict = profile_print(calculate_factorials_up_to_number, 0)
+def monte_carlo_pi(iterations):
+    points = np.random.rand(iterations, 2)
+    inside_circle = np.count_nonzero(np.sum(points**2, axis=1) <= 1)
+    return inside_circle
+
+result_dict = profile_print(monte_carlo_pi, 100)
 save_dict_as_json(result_dict, 'interim_files/profiler_obj.json')

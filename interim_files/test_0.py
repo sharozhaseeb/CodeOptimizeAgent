@@ -14,7 +14,7 @@ def test_case():
     start_memory = memory_usage_psutil()
 
     # Call the function here
-    calculate_factorials_up_to_number(1000)
+    monte_carlo_pi(1000000)
     
     end_time = time.time()
     end_memory = memory_usage_psutil()
@@ -23,11 +23,16 @@ def test_case():
     print(f"Memory used: {end_memory - start_memory} B")
 
 
-def calculate_factorials_up_to_number(n):
-    factorial = 1
-    yield factorial  # The factorial of 0 is 1
-    for i in range(1, n + 1):
-        factorial *= i
-        yield factorial
+import numpy as np
+import numexpr as ne
+
+def monte_carlo_pi(iterations):
+    points = np.random.rand(iterations, 2)
+    sum_points = np.sum(points**2, axis=1)
+
+    # Using numexpr for optimization
+    inside_circle = np.count_nonzero(ne.evaluate("sum_points <= 1"))
+    
+    return inside_circle
 
 test_case()
