@@ -27,7 +27,7 @@ class optimization_suggestor_agent:
 
         for idx, exec_obj in enumerate(self.execution_obj):
             exec_str += f"{case_list[idx]};\nTime taken: {exec_obj['Time taken']}\nMemory used: {exec_obj['Memory used']}\n\n"
-        exec_str += "Critically analyze the code and suggest improvements. Focus on the lines with the higher percentage. Keep the name of the function or class the same along with the inputs and output."
+        exec_str += "Critically analyze the code and suggest improvements. Focus on the lines with the higher percentage. Keep the name of the function or class the same along with the inputs and output. Donot split the function into multiple functions"
 
         BASE_PROMPT = eval(open("prompts/op_case_base.json").read())
         _EXT        = {

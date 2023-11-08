@@ -28,7 +28,7 @@ class testcase_agent:
 
         USER_DICT    =  {
             "role": "user",
-            "content": F"```python\n{self.code}\n```"
+            "content": f"```python\n{self.code}\n```\nGive full test cases don't use ellipsis."
                         }
 
         BASE_MESSAGE.append(USER_DICT)

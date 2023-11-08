@@ -14,7 +14,7 @@ def test_case():
     start_memory = memory_usage_psutil()
 
     # Call the function here
-    monte_carlo_pi(10000)
+    merge_sort([5, 2, 9, 1, 7, 3, 6, 4, 8])
     
     end_time = time.time()
     end_memory = memory_usage_psutil()
@@ -23,16 +23,30 @@ def test_case():
     print(f"Memory used: {end_memory - start_memory} B")
 
 
-import numpy as np
-import numexpr as ne
-
-def monte_carlo_pi(iterations):
-    points = np.random.rand(iterations, 2)
-    sum_points = np.sum(points**2, axis=1)
-
-    # Using numexpr for optimization
-    inside_circle = np.count_nonzero(ne.evaluate("sum_points <= 1"))
-    
-    return inside_circle
+def merge_sort(lst, start=0, end=None):
+    if end is None: end = len(lst)
+    if end - start > 1:
+        mid = (start + end) // 2
+        merge_sort(lst, start, mid)
+        merge_sort(lst, mid, end)
+        merge(lst, start, mid, end)
+        
+def merge(lst, start, mid, end):
+    left = lst[start: mid]
+    right = lst[mid: end]
+    i = j = 0
+    for k in range(start, end):
+        if i >= len(left):
+            lst[k] = right[j]
+            j += 1
+        elif j >= len(right):
+            lst[k] = left[i]
+            i += 1
+        elif left[i] < right[j]:
+            lst[k] = left[i]
+            i += 1
+        else: # if right[j] <= left[i]
+            lst[k] = right[j]
+            j += 1
 
 test_case()

@@ -53,12 +53,16 @@ def save_dict_as_json(data, output_path):
         print(f"An error occurred while saving the JSON data: {e}")
 
 
-import numpy as np
+def merge_sort(lst):
+    if len(lst) > 1:
+        mid = len(lst) // 2
+        left = merge_sort(lst[:mid])
+        right = merge_sort(lst[mid:])
 
-def monte_carlo_pi(iterations):
-    points = np.random.rand(iterations, 2)
-    inside_circle = np.count_nonzero(np.sum(points**2, axis=1) <= 1)
-    return inside_circle
+        # Merge the sorted halves
+        lst = sorted(left + right)
 
-result_dict = profile_print(monte_carlo_pi, 100)
+    return lst
+
+result_dict = profile_print(merge_sort, [1, 2, 3, 4, 5, 6, 7, 8, 9])
 save_dict_as_json(result_dict, 'interim_files/profiler_obj.json')

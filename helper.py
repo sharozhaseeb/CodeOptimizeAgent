@@ -52,7 +52,7 @@ def extract_string_between_parentheses(input_str):
 
 def extract_code(text:str) -> str:
     if '```python' not in text:
-        raise ValueError('no code found')
+        raise ValueError(f'no code found:{text}')
     else:
         pattern = r'```python(.*?)```'
 
