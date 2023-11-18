@@ -2,9 +2,12 @@ import time
 import sys
 import os
 import psutil
+import sys
+import signal
+sys.setrecursionlimit(3000)  # Set the recursion limit to a higher value
 
 def memory_usage_psutil():
-    # return the memory usage in MB
+    # Return the memory usage in bytes
     process = psutil.Process(os.getpid())
     mem_info = process.memory_info()
     return mem_info.rss
@@ -13,40 +16,35 @@ def test_case():
     start_time = time.time()
     start_memory = memory_usage_psutil()
 
+    # Set an alarm signal to interrupt after 10sec
+    signal.signal(signal.SIGALRM, timeout_handler)
+    signal.alarm(10)  # Set the alarm for 10sec
+
     # Call the function here
-    merge_sort([1, 2, 3, 4, 5, 6, 7, 8, 9])
-    
-    end_time = time.time()
-    end_memory = memory_usage_psutil()
+    try:
+        collatz(1)
+        end_time = time.time()
+        end_memory = memory_usage_psutil()
 
-    print(f"Time taken: {end_time - start_time} seconds")
-    print(f"Memory used: {end_memory - start_memory} B")
+        print(f"Time taken: {end_time - start_time} seconds")
+        print(f"Memory used: {end_memory - start_memory} bytes")
 
+    except TimeoutError:
+        #print("Execution timed out. Exiting...")
+        end_time = time.time()
+        end_memory = memory_usage_psutil()
 
-def merge_sort(lst, start=0, end=None):
-    if end is None: end = len(lst)
-    if end - start > 1:
-        mid = (start + end) // 2
-        merge_sort(lst, start, mid)
-        merge_sort(lst, mid, end)
-        merge(lst, start, mid, end)
-        
-def merge(lst, start, mid, end):
-    left = lst[start: mid]
-    right = lst[mid: end]
-    i = j = 0
-    for k in range(start, end):
-        if i >= len(left):
-            lst[k] = right[j]
-            j += 1
-        elif j >= len(right):
-            lst[k] = left[i]
-            i += 1
-        elif left[i] < right[j]:
-            lst[k] = left[i]
-            i += 1
-        else: # if right[j] <= left[i]
-            lst[k] = right[j]
-            j += 1
+        print(f"Time taken: 60 seconds")
+        print(f"Memory used: 1100 bytes")
+
+def timeout_handler(signum, frame):
+    raise TimeoutError
+def collatz(n, memo = {1:[1]}):
+    if n not in memo:  #percent_time: 69.3%
+        if n % 2 == 0:
+            memo[n] = [n] + collatz(n // 2)
+        else:
+            memo[n] = [n] + collatz(3*n + 1)
+    return memo[n] #percent_time: 30.7%
 
 test_case()

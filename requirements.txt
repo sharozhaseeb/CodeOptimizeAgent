@@ -1,0 +1,6 @@
+openai==0.28.1
+termcolor
+python-dotenv
+line_profiler
+psutil
+numpy

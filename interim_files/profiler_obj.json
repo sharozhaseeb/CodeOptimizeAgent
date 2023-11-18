@@ -1,1 +1,1 @@
-{"if len(lst) > 1:": {"hits": "57", "percent_time": "23.5"}, "mid = len(lst) // 2": {"hits": "58", "percent_time": "10.0"}, "left = merge_sort(lst[:mid])": {"hits": "59", "percent_time": "17.1"}, "right = merge_sort(lst[mid:])": {"hits": "60", "percent_time": "11.7"}, "lst = sorted(left + right)": {"hits": "63", "percent_time": "25.9"}, "return lst": {"hits": "65", "percent_time": "11.8"}}
+{"if n not in memo:": {"hits": "71", "percent_time": "69.3"}, "== 0:": {"hits": "72", "percent_time": "2"}, "return memo[n]": {"hits": "76", "percent_time": "30.7"}}

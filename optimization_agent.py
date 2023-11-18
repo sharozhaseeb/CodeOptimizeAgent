@@ -27,7 +27,7 @@ class optimization_suggestor_agent:
 
         for idx, exec_obj in enumerate(self.execution_obj):
             exec_str += f"{case_list[idx]};\nTime taken: {exec_obj['Time taken']}\nMemory used: {exec_obj['Memory used']}\n\n"
-        exec_str += "Critically analyze the code and suggest improvements. Focus on the lines with the higher percentage. Keep the name of the function or class the same along with the inputs and output. Donot split the function into multiple functions"
+        exec_str += "Critically analyze the code and suggest improvements. Focus on the lines with the higher percentage. Keep the name of the function or class the same along with the inputs and output. Donot split the function into multiple functions, create higher order functions if necessary."
 
         BASE_PROMPT = eval(open("prompts/op_case_base.json").read())
         _EXT        = {
@@ -92,7 +92,7 @@ class optimization_suggestor_agent:
 
         for idx, exec_obj in enumerate(self.current_phase_testrun):
             exec_str += f"{case_list[idx]};\nTime taken: {exec_obj['Time taken']}\nMemory used: {exec_obj['Memory used']}\n\n"
-        exec_str += "This is the information of the updated code, can it be made better? Your main concern is execution time and memory consumption. Critically think."
+        exec_str += "This is the information of the updated code, can it be made better? Your main concern is execution time and memory consumption. Critically think and write error free code without using any third party packages . If the code cannot be optimized further return the same code."
         _EXT = {"role":"user",
                 "content": exec_str}
         

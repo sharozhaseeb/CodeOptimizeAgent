@@ -28,14 +28,14 @@ class testcase_agent:
 
         USER_DICT    =  {
             "role": "user",
-            "content": f"```python\n{self.code}\n```\nGive full test cases don't use ellipsis."
+            "content": f"```python\n{self.code}\n```\nFor large lists use list comprehension e.g. in cases where you want a list [100, 99, 99, ..., 2, 1] you will respond with [x for x in range(1, 101)]."
                         }
 
         BASE_MESSAGE.append(USER_DICT)
         response = openai.ChatCompletion.create(
-        model="gpt-3.5-turbo",
+        model="gpt-4",
         messages= BASE_MESSAGE,
-        temperature=0.1,
+        temperature=0.5,
         max_tokens=1110,
         top_p=1,
         frequency_penalty=0,

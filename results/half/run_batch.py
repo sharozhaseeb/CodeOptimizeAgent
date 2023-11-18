@@ -17,7 +17,7 @@ import time
 # r_err = 0
 
 def flow(): 
-    dataset_raw = open("dataset/single_input_functions_full.txt").read()
+    dataset_raw = open("dataset/single_input_functions.txt").read()
     dataset_mutated = re.sub(r'#\$%\d+\$%#', '', dataset_raw)
 
     dataset_mutated = dataset_mutated.split("\n\n")

@@ -3,18 +3,29 @@ import io
 import sys
 import json
 import ast
+import sys
+import signal
+sys.setrecursionlimit(3000)  # Set the recursion limit to a higher value
 
 def profile_print(func_to_profile, *func_args):
     lp = LineProfiler()
     lp.add_function(func_to_profile)
     lp.enable_by_count()
-    lp.runctx('func_to_profile(*func_args)', locals=locals(), globals=globals())
-
-    stdout_ = sys.stdout  # keep track of the previous value.
+    
+    # Set an alarm signal to interrupt after 1 minute
+    signal.signal(signal.SIGALRM, timeout_handler)
+    signal.alarm(60)  # Set the alarm for 1 minute
+    
+    try:
+        lp.runctx('func_to_profile(*func_args)', locals=locals(), globals=globals())
+    except TimeoutError:
+        print("Execution timed out. Exiting...")
+    
+    stdout_ = sys.stdout  # Keep track of the previous value.
     stream = io.StringIO()
-    sys.stdout = stream  # redirect output to the stream
-    lp.print_stats(output_unit=0.001)  # values are in milliseconds
-    sys.stdout = stdout_  # restore the previous stdout.
+    sys.stdout = stream  # Redirect output to the stream
+    lp.print_stats(output_unit=0.001)  # Values are in milliseconds
+    sys.stdout = stdout_  # Restore the previous stdout.
 
     profile_output = stream.getvalue().split('\n')
     for line in profile_output:
@@ -51,18 +62,18 @@ def save_dict_as_json(data, output_path):
         print('JSON data has been saved to', output_path)
     except IOError as e:
         print(f"An error occurred while saving the JSON data: {e}")
+        
+def timeout_handler(signum, frame):
+    raise TimeoutError
 
 
-def merge_sort(lst):
-    if len(lst) > 1:
-        mid = len(lst) // 2
-        left = merge_sort(lst[:mid])
-        right = merge_sort(lst[mid:])
+def collatz(n, memo = {1:[1]}):
+    if n not in memo: 
+        if n % 2 == 0:
+            memo[n] = [n] + collatz(n // 2)
+        else:
+            memo[n] = [n] + collatz(3*n + 1)
+    return memo[n]
 
-        # Merge the sorted halves
-        lst = sorted(left + right)
-
-    return lst
-
-result_dict = profile_print(merge_sort, [1, 2, 3, 4, 5, 6, 7, 8, 9])
+result_dict = profile_print(collatz, 1)
 save_dict_as_json(result_dict, 'interim_files/profiler_obj.json')
