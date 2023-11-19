@@ -18,7 +18,7 @@ def test_case():
 
     # Set an alarm signal to interrupt after 10sec
     signal.signal(signal.SIGALRM, timeout_handler)
-    signal.alarm(10)  # Set the alarm for 10sec
+    signal.alarm(5)  # Set the alarm for 10sec
 
     # Call the function here
     try:
@@ -39,12 +39,13 @@ def test_case():
 
 def timeout_handler(signum, frame):
     raise TimeoutError
-def collatz(n, memo = {1:[1]}):
-    if n not in memo:  #percent_time: 69.3%
-        if n % 2 == 0:
-            memo[n] = [n] + collatz(n // 2)
-        else:
-            memo[n] = [n] + collatz(3*n + 1)
-    return memo[n] #percent_time: 30.7%
+def collatz(n):
+    sequence = [n]
+    
+    while n != 1:
+        n = n // 2 if n % 2 == 0 else 3 * n + 1
+        sequence.append(n)
+    
+    return sequence
 
 test_case()

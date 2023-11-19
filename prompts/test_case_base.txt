@@ -18,7 +18,7 @@ def test_case():
 
     # Set an alarm signal to interrupt after 10sec
     signal.signal(signal.SIGALRM, timeout_handler)
-    signal.alarm(10)  # Set the alarm for 10sec
+    signal.alarm(5)  # Set the alarm for 10sec
 
     # Call the function here
     try:

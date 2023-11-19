@@ -56,7 +56,7 @@ class optimization_suggestor_agent:
 
        self.phase_info.append((extract_code(self.gpt_resp), self.gpt_resp.split("```python")[0]))
        return self.phase_info
-    
+
     def run_current_phase(self) -> list:
 
         cd_exec = code_executor(
