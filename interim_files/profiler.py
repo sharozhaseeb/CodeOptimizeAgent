@@ -67,13 +67,11 @@ def timeout_handler(signum, frame):
     raise TimeoutError
 
 
-def collatz(n, memo = {1:[1]}):
-    if n not in memo: 
-        if n % 2 == 0:
-            memo[n] = [n] + collatz(n // 2)
-        else:
-            memo[n] = [n] + collatz(3*n + 1)
-    return memo[n]
+import math
 
-result_dict = profile_print(collatz, 1)
+def factorial(n):
+    result = math.factorial(n)
+    return result
+
+result_dict = profile_print(factorial, 1)
 save_dict_as_json(result_dict, 'interim_files/profiler_obj.json')

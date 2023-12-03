@@ -22,7 +22,7 @@ def test_case():
 
     # Call the function here
     try:
-        collatz(50)
+        factorial(50)
         end_time = time.time()
         end_memory = memory_usage_psutil()
 
@@ -39,13 +39,10 @@ def test_case():
 
 def timeout_handler(signum, frame):
     raise TimeoutError
-def collatz(n):
-    sequence = [n]
-    
-    while n != 1:
-        n = n // 2 if n % 2 == 0 else 3 * n + 1
-        sequence.append(n)
-    
-    return sequence
+import math
+
+def factorial(n):
+    result = math.factorial(n)
+    return result
 
 test_case()

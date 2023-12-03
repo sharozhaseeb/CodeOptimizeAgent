@@ -22,7 +22,7 @@ def test_case():
 
     # Call the function here
     try:
-        factorial(1000)
+        merge_sort([x for x in range(1, 101)])  # List is already sorted
         end_time = time.time()
         end_memory = memory_usage_psutil()
 
@@ -38,11 +38,9 @@ def test_case():
         print(f"Memory used: 1100 bytes")
 
 def timeout_handler(signum, frame):
-    raise TimeoutError
-import math
-
-def factorial(n):
-    result = math.factorial(n)
-    return result
+    raise TimeoutError        while j < len(right_half):
+            arr[k] = right_half[j]
+            j += 1
+            k += 1
 
 test_case()

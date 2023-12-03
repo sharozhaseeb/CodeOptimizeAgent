@@ -17,7 +17,7 @@ import time
 # r_err = 0
 
 def flow(): 
-    dataset_raw = open("dataset/single_input_functions_full.txt").read()
+    dataset_raw = open("dataset/single_input_functions.txt").read()
     dataset_mutated = re.sub(r'#\$%\d+\$%#', '', dataset_raw)
 
     dataset_mutated = dataset_mutated.split("\n\n")
@@ -78,14 +78,14 @@ def flow():
             print(colored("--------------", 'white'))
             continue
 
-    with open("data_l.json", 'w') as json_file:
+    with open("data_l_demo.json", 'w') as json_file:
         json.dump(data_l, json_file)
 
 
-    with open("data.json", 'w') as json_file:
+    with open("data_demo.json", 'w') as json_file:
         json.dump(dataset_response, json_file)
 
-    with open("data.pkl", 'wb') as pickle_file:
+    with open("data_demo.pkl", 'wb') as pickle_file:
         pickle.dump(dataset_response, pickle_file)
 
 
